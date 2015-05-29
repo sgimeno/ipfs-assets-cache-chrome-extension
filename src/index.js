@@ -1,3 +1,1 @@
-var Application = require('./modules/application');
-
-var app = new Application();
+var adpure = require('./modules/popup');
