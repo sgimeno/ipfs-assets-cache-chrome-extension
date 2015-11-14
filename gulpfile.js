@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var rename = require('gulp-rename');
 var util = require('gulp-util');
 var del = require('del');
 var browserify = require('browserify');
@@ -36,11 +37,11 @@ gulp.task('js', function(){
     return b.bundle()
       // log errors if they happen
       .on('error', util.log.bind(util, 'Browserify Error'))
-      .pipe(source('index.js'))
+      .pipe(source('bundle.js'))
       // optional, remove if you don't need to buffer file contents
       .pipe(buffer())
       // optional, remove if you dont want sourcemaps
-      .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
+      //.pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
          // Add transformation tasks to the pipeline here.
       .pipe(sourcemaps.write('./')) // writes .map file
       .pipe(gulp.dest('./dist'))
@@ -63,7 +64,7 @@ gulp.task('watchify', function(){
     return b.bundle()
       // log errors if they happen
       .on('error', util.log.bind(util, 'Browserify Error'))
-      .pipe(source('index.js'))
+      .pipe(source('bundle.js'))
       // optional, remove if you don't need to buffer file contents
       .pipe(buffer())
       // optional, remove if you dont want sourcemaps
@@ -81,7 +82,14 @@ gulp.task('watchify', function(){
 });
 
 gulp.task('html', function(){
-	gulp.src(['./src/**/*.html'])
+	gulp.src(['./src/index.html'])
+    .pipe(rename('popup.html'))
+		.pipe(gulp.dest('./dist'))
+		.pipe(livereload());
+});
+
+gulp.task('assets', function(){
+	gulp.src(['./src/manifest.json', './src/icon.png'])
 		.pipe(gulp.dest('./dist'))
 		.pipe(livereload());
 });
@@ -95,4 +103,4 @@ gulp.task('watch', ['watchify'], function() {
     gulp.watch(['./src/**/*.html'], ['html']);
 });
 
-gulp.task('build', ['html', 'js']);
+gulp.task('build', ['assets', 'html', 'js']);
