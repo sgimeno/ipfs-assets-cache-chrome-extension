@@ -1,7 +1,7 @@
 {
-  "name": "browserify-boilerplate",
+  "name": "ipfs-assets-cache-chrome-extension",
   "version": "0.0.1",
-  "description": "A browserify boilerplate with watchify for quick web app development",
+  "description": "A Chrome Extension boilerplate with watchify for quick web app development",
   "main": "index.js",
   "scripts": {
     "postinstall": "./node_modules/.bin/gulp build",
