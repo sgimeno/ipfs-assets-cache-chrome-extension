@@ -101,6 +101,7 @@ gulp.task('clean', function(done) {
 gulp.task('watch', ['watchify'], function() {
     livereload.listen();
     gulp.watch(['./src/**/*.html'], ['html']);
+    gulp.watch(['./src/manifest.json', './src/icon.png'], ['assets'])
 });
 
 gulp.task('build', ['assets', 'html', 'js']);
