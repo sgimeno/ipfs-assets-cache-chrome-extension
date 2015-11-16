@@ -30,5 +30,5 @@ var assets = []
 
 //3. Load the content from the local gateway for each hashe
 
-
+console.clear();
 console.log(assets);

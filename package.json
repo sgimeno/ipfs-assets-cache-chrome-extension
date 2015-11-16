@@ -10,14 +10,19 @@
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "gimeno.sergio@gmail.com",
   "devDependencies": {
+    "browserify": "^12.0.1",
     "del": "^1.1.1",
     "gulp": "^3.8.11",
-    "gulp-livereload": "^3.8.0"
+    "gulp-livereload": "^3.8.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "lodash.assign": "^3.2.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
