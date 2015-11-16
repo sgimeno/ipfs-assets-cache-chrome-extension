@@ -1,5 +1,10 @@
-function getAttr(collection, attrName){
-  return collection.filter(function(node){
+//1. Scrap script and link tags
+//2. Fetch the hashes through the ipfs-assets-cache server
+//3. Load the content from the local gateway for each hashe
+//4. NTH option for setting local/public gateway
+
+function getAttrs(arr, attrName){
+  return arr.filter(function(node){
     return node.attributes[attrName];
   })
   .map(function(node){
@@ -7,8 +12,23 @@ function getAttr(collection, attrName){
   });
 }
 
+//1. Scrap script and link tags
 var scripts = Array.prototype.slice.call(document.getElementsByTagName('script'));
 var links = Array.prototype.slice.call(document.getElementsByTagName('link'));
-var assets = getAttr(scripts, 'src').concat(getAttr(links, 'href'));
+var assets = []
+  .concat(getAttrs(scripts, 'src'))
+  .concat(getAttrs(links, 'href'))
+  .map(function(url){
+    if (url.startsWith('//')){
+      return 'http:' + url;
+    }
+    return url;
+  });
+
+//2. Fetch the hashes through the ipfs-assets-cache server
+//TODO: add multiparam support in server
+
+//3. Load the content from the local gateway for each hashe
+
 
 console.log(assets);
